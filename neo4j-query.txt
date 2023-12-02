@@ -1,0 +1,59 @@
+// Membuat Kampus Universitas Pamulang
+CREATE (:Campus {name: 'Universitas Pamulang'})
+
+// Membuat Mahasiswa dan Menghubungkannya dengan Kampus
+CREATE (:Student {name: 'Rio Mulya Syawal', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Firlan Syah', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Daffa Julianto', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Muhammad Bayu', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Ahmad Danu', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
+
+// Menambahkan Informasi Mata Kuliah
+MATCH (student:Student {name: 'Rio Mulya Syawal'})-[:ENROLLED_IN]->(campus:Campus)
+CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Matematika Dasar', semester: 5, campus: campus.name})
+
+MATCH (student:Student {name: 'Firlan Syah'})-[:ENROLLED_IN]->(campus:Campus)
+CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Fisika Dasar', semester: 5, campus: campus.name})
+
+MATCH (student:Student {name: 'Daffa Julianto'})-[:ENROLLED_IN]->(campus:Campus)
+CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Kimia Dasar', semester: 5, campus: campus.name})
+
+MATCH (student:Student {name: 'Muhammad Bayu'})-[:ENROLLED_IN]->(campus:Campus)
+CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Bahasa Inggris', semester: 5, campus: campus.name})
+
+MATCH (student:Student {name: 'Ahmad Danu'})-[:ENROLLED_IN]->(campus:Campus)
+CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Sistem Operasi', semester: 5, campus: campus.name})
+
+
+// Menampilkan Semua Mahasiswa dan Kampusnya
+MATCH (student:Student)-[:ENROLLED_IN]->(campus:Campus)
+RETURN student, campus
+
+// Menampilkan Semua Mahasiswa dan Kampusnya
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[:ENROLLED_IN]->(subject:Subject)
+RETURN student, subject
+
+// Memperbarui Nama Mahasiswa:
+MATCH (student:Student {name: 'Nama Mahasiswa'})
+SET student.name = 'Nama Mahasiswa Baru'
+RETURN student
+
+
+MATCH (subject:Subject {name: 'Nama Mata Kuliah'})
+SET subject.name = 'Nama Mata Kuliah Baru'
+RETURN subject
+
+
+// Menghapus Seorang Mahasiswa
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[:ENROLLED_IN]->(campus:Campus)
+DETACH DELETE student, campus
+
+
+//Menghapus Sebuah Mata Kuliah dari Seorang Mahasiswa:
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[enrolled:ENROLLED_IN]->(subject:Subject {name: 'Nama Mata Kuliah'})
+DELETE enrolled
+RETURN student, subject
+
+
+// Menghapus semua node dan relasi
+MATCH (n) DETACH DELETE n

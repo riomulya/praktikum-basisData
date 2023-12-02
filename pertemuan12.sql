@@ -74,19 +74,13 @@ VALUES (
 
 -- c) Buat Objek Trigger "trigger1" dengan Operasi INSERT
 
-DELIMITER //
-
-CREATE TRIGGER TRIGGER1 BEFORE INSERT ON PASIEN FOR 
-EACH ROW BEGIN 
--- ISI TRIGGER1 SESUAI KEBUTUHAN 
-	-- ISI TRIGGER1 SESUAI KEBUTUHAN
-	-- ISI TRIGGER1 SESUAI KEBUTUHAN
-	-- Isi trigger1 sesuai kebutuhan
-	-- Contoh: Insert ke tabel lain atau operasi lain
-	END // 
+CREATE TRIGGER TRIGGER1 
+	TRIGGER1 TRIGGER1 TRIGGER1 TRIGGER1 TRIGGER1 TRIGGER1 TRIGGER1 TRIGGER1 BEFORE
+	INSERT
+	    ON PASIEN FOR EACH @jmlpenambahan = @jmlpenambahan + 1;
 
 
-DELIMITER ;
+select @jmlpenambahan;
 
 -- d) Buat Struktur Database "bioskop" dengan Tabel "JadwalFilm"
 
@@ -207,3 +201,6 @@ SELECT Judul, Waktu, namaStdio
 FROM tblview
 WHERE namaStdio = 'stdio 1';
 
+-- Atau
+
+SELECT Judul, Waktu, namaStdio FROM tblview WHERE Judul = 'Haunt';

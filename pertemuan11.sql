@@ -1,44 +1,34 @@
+-- Active: 1687412249933@@127.0.0.1@3306@routine
+
 -- Tugas Praktikum - MySQL Workbench Documentation
 
 -- a) Buatlah Struktur Database "Routine."
 
 CREATE DATABASE Routine;
 
+use Routine;
+
 -- b) Buat Fungsi Tersimpan "fungsi1" dengan Parameter a
 
-DELIMITER //
-
-CREATE FUNCTION FUNGSI1(A SMALLINT) RETURNS INT BEGIN 
-RETURN 
-	RETURN RETURN (a + a);
-	END // 
+CREATE FUNCTION FUNGSI1 
+	FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 FUNGSI1 fungsi1(a smallint) returns int
+	return(a + a);
 
 
-DELIMITER ;
+select fungsi1(60);
+
+CREATE FUNCTION FUNGSI2 
+	FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 FUNGSI2 fungsi2(kar char(50)) returns int
+	return length(kar);
+
+
+select fungsi2("MySQL");
+
+drop function fungsi3;
+
+show create function fungsi1;
 
 -- c) Buat Fungsi Tersimpan "fungsi2" dengan Parameter kar
-
-DELIMITER //
-
-CREATE FUNCTION FUNGSI2(KAR CHAR(50)) RETURNS INT BEGIN 
-RETURN 
-	RETURN RETURN LENGTH(kar);
-	END // 
-
-
-DELIMITER ;
-
--- d) Buat Fungsi Tersimpan "fungsi3" dengan Parameter a
-
-DELIMITER //
-
-CREATE FUNCTION FUNGSI3(A SMALLINT) RETURNS INT BEGIN 
--- ISI FUNGSI3 DI SINI (SESUAI KEBUTUHAN) 
-	-- ISI FUNGSI3 DI SINI (SESUAI KEBUTUHAN)
-	-- Isi fungsi3 di sini (sesuai kebutuhan)
-	RETURN 0;
-	END // 
-
 
 DELIMITER ;
 
@@ -53,6 +43,13 @@ SHOW CREATE FUNCTION fungsi2;
 SHOW CREATE FUNCTION fungsi3;
 
 -- g) Hapus Fungsi Tersimpan "fungsi3"
+
+CREATE FUNCTION FUNGSI3 
+	FUNGSI3 FUNGSI3 fungsi3(a smallint){returns int
+	return(a * a + a)};
+
+
+SELECT fungsi3(10);
 
 DROP FUNCTION fungsi3;
 
@@ -84,17 +81,20 @@ INSERT INTO siswa VALUES ('11238', 'endang', '2013/2014');
 
 -- j) Buat Procedure "jumlahsiswa"
 
-DELIMITER //
-
-CREATE PROCEDURE JUMLAHSISWA(OUT PARAMETER1 INT) BEGIN 
-SELECT 
-	SELECT COUNT(*) INTO parameter1 FROM siswa;
-	END ;
-
-
-DELIMITER ;
-
 -- k) Panggil Procedure "jumlahsiswa" dan Tampilkan Hasil
+
+delimiter // 
+
+CREATE PROCEDURE jumlahsiswa(OUT parameter1 INT);
+
+
+BEGIN 
+
+select count(*) into parameter1 from siswa;
+
+end
+
+delimiter ;
 
 CALL jumlahsiswa(@a);
 
