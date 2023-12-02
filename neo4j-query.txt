@@ -30,14 +30,13 @@ MATCH (student:Student)-[:Berkuliah]->(campus:Campus)
 RETURN student, campus
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
-MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Mempelajari]->(subject:Subject)
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Mempelajari]->(subject:Matkul)
 RETURN student, subject
 
 // Memperbarui Nama Mahasiswa:
 MATCH (student:Student {name: 'Nama Mahasiswa'})
 SET student.name = 'Nama Mahasiswa Baru'
 RETURN student
-
 
 MATCH (subject:Subject {name: 'Nama Mata Kuliah'})
 SET subject.name = 'Nama Mata Kuliah Baru'
