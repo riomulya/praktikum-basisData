@@ -30,7 +30,7 @@ MATCH (student:Student)-[:Berkuliah]->(campus:Campus)
 RETURN student, campus
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
-MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Berkuliah]->(subject:Subject)
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Mempelajari]->(subject:Subject)
 RETURN student, subject
 
 // Memperbarui Nama Mahasiswa:
@@ -50,7 +50,7 @@ DETACH DELETE student, campus
 
 
 //Menghapus Sebuah Mata Kuliah dari Seorang Mahasiswa:
-MATCH (student:Student {name: 'Nama Mahasiswa'})-[enrolled:Berkuliah]->(subject:Subject {name: 'Nama Mata Kuliah'})
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[enrolled:Mempelajari]->(subject:Subject {name: 'Nama Mata Kuliah'})
 DELETE enrolled
 RETURN student, subject
 
