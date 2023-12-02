@@ -2,35 +2,35 @@
 CREATE (:Campus {name: 'Universitas Pamulang'})
 
 // Membuat Mahasiswa dan Menghubungkannya dengan Kampus
-CREATE (:Student {name: 'Rio Mulya Syawal', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Firlan Syah', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Daffa Julianto', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Muhammad Bayu', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Ahmad Danu', semester: 5})-[:ENROLLED_IN]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Rio Mulya Syawal', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Firlan Syah', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Daffa Julianto', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Muhammad Bayu', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Ahmad Danu', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
 
 // Menambahkan Informasi Mata Kuliah
-MATCH (student:Student {name: 'Rio Mulya Syawal'})-[:ENROLLED_IN]->(campus:Campus)
-CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Matematika Dasar', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Rio Mulya Syawal'})-[:Berkuliah]->(campus:Campus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Matematika Dasar', semester: 5, campus: campus.name})
 
-MATCH (student:Student {name: 'Firlan Syah'})-[:ENROLLED_IN]->(campus:Campus)
-CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Fisika Dasar', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Firlan Syah'})-[:Berkuliah]->(campus:Campus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Fisika Dasar', semester: 5, campus: campus.name})
 
-MATCH (student:Student {name: 'Daffa Julianto'})-[:ENROLLED_IN]->(campus:Campus)
-CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Kimia Dasar', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Daffa Julianto'})-[:Berkuliah]->(campus:Campus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Kimia Dasar', semester: 5, campus: campus.name})
 
-MATCH (student:Student {name: 'Muhammad Bayu'})-[:ENROLLED_IN]->(campus:Campus)
-CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Bahasa Inggris', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Muhammad Bayu'})-[:Berkuliah]->(campus:Campus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Bahasa Inggris', semester: 5, campus: campus.name})
 
-MATCH (student:Student {name: 'Ahmad Danu'})-[:ENROLLED_IN]->(campus:Campus)
-CREATE (student)-[:ENROLLED_IN]->(:Subject {name: 'Sistem Operasi', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Ahmad Danu'})-[:Berkuliah]->(campus:Campus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Sistem Operasi', semester: 5, campus: campus.name})
 
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
-MATCH (student:Student)-[:ENROLLED_IN]->(campus:Campus)
+MATCH (student:Student)-[:Berkuliah]->(campus:Campus)
 RETURN student, campus
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
-MATCH (student:Student {name: 'Nama Mahasiswa'})-[:ENROLLED_IN]->(subject:Subject)
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Berkuliah]->(subject:Subject)
 RETURN student, subject
 
 // Memperbarui Nama Mahasiswa:
@@ -45,12 +45,12 @@ RETURN subject
 
 
 // Menghapus Seorang Mahasiswa
-MATCH (student:Student {name: 'Nama Mahasiswa'})-[:ENROLLED_IN]->(campus:Campus)
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Berkuliah]->(campus:Campus)
 DETACH DELETE student, campus
 
 
 //Menghapus Sebuah Mata Kuliah dari Seorang Mahasiswa:
-MATCH (student:Student {name: 'Nama Mahasiswa'})-[enrolled:ENROLLED_IN]->(subject:Subject {name: 'Nama Mata Kuliah'})
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[enrolled:Berkuliah]->(subject:Subject {name: 'Nama Mata Kuliah'})
 DELETE enrolled
 RETURN student, subject
 
