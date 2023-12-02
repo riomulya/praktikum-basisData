@@ -1,33 +1,33 @@
 // Membuat Kampus Universitas Pamulang
-CREATE (:Campus {name: 'Universitas Pamulang'})
+CREATE (:kampus {name: 'Universitas Pamulang'})
 
 // Membuat Mahasiswa dan Menghubungkannya dengan Kampus
-CREATE (:Student {name: 'Rio Mulya Syawal', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Firlan Syah', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Daffa Julianto', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Muhammad Bayu', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
-CREATE (:Student {name: 'Ahmad Danu', semester: 5})-[:Berkuliah]->(:Campus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Rio Mulya Syawal', semester: 5})-[:Berkuliah]->(:kampus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Firlan Syah', semester: 5})-[:Berkuliah]->(:kampus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Daffa Julianto', semester: 5})-[:Berkuliah]->(:kampus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Muhammad Bayu', semester: 5})-[:Berkuliah]->(:kampus {name: 'Universitas Pamulang'})
+CREATE (:Student {name: 'Ahmad Danu', semester: 5})-[:Berkuliah]->(:kampus {name: 'Universitas Pamulang'})
 
 // Menambahkan Informasi Mata Kuliah
-MATCH (student:Student {name: 'Rio Mulya Syawal'})-[:Berkuliah]->(campus:Campus)
-CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Matematika Dasar', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Rio Mulya Syawal'})-[:Berkuliah]->(kampus:kampus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Matematika Dasar', semester: 5, kampus: kampus.name})
 
-MATCH (student:Student {name: 'Firlan Syah'})-[:Berkuliah]->(campus:Campus)
-CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Fisika Dasar', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Firlan Syah'})-[:Berkuliah]->(kampus:kampus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Fisika Dasar', semester: 5, kampus: kampus.name})
 
-MATCH (student:Student {name: 'Daffa Julianto'})-[:Berkuliah]->(campus:Campus)
-CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Kimia Dasar', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Daffa Julianto'})-[:Berkuliah]->(kampus:kampus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Kimia Dasar', semester: 5, kampus: kampus.name})
 
-MATCH (student:Student {name: 'Muhammad Bayu'})-[:Berkuliah]->(campus:Campus)
-CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Bahasa Inggris', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Muhammad Bayu'})-[:Berkuliah]->(kampus:kampus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Bahasa Inggris', semester: 5, kampus: kampus.name})
 
-MATCH (student:Student {name: 'Ahmad Danu'})-[:Berkuliah]->(campus:Campus)
-CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Sistem Operasi', semester: 5, campus: campus.name})
+MATCH (student:Student {name: 'Ahmad Danu'})-[:Berkuliah]->(kampus:kampus)
+CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Sistem Operasi', semester: 5, kampus: kampus.name})
 
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
-MATCH (student:Student)-[:Berkuliah]->(campus:Campus)
-RETURN student, campus
+MATCH (student:Student)-[:Berkuliah]->(kampus:kampus)
+RETURN student, kampus
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
 MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Mempelajari]->(subject:Matkul)
@@ -44,8 +44,8 @@ RETURN subject
 
 
 // Menghapus Seorang Mahasiswa
-MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Berkuliah]->(campus:Campus)
-DETACH DELETE student, campus
+MATCH (student:Student {name: 'Nama Mahasiswa'})-[:Berkuliah]->(kampus:kampus)
+DETACH DELETE student, kampus
 
 
 //Menghapus Sebuah Mata Kuliah dari Seorang Mahasiswa:
