@@ -26,7 +26,7 @@ CREATE (student)-[:Mempelajari]->(:Matkul {name: 'Sistem Operasi', semester: 5, 
 
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
-MATCH (student:Student)-[:Berkuliah]->(kampus:kampus)
+MATCH (student:Student)-[:Berkuliah]->(kampus:Kampus)
 RETURN student, kampus
 
 // Menampilkan Semua Mahasiswa dan Kampusnya
