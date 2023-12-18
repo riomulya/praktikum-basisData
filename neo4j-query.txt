@@ -56,3 +56,69 @@ RETURN student, subject
 
 // Menghapus semua node dan relasi
 MATCH (n) DETACH DELETE n
+
+
+
+// Menambahkan Informasi Mengenai Dosen Pengajar: cypher
+   MATCH (kampus:Kampus {name: 'Universitas Pamulang'})
+   CREATE (:Dosen {name: 'Dr. Indah Permata', mata_kuliah: 'Matematika Dasar'})-[:Mengajar]->(kampus)
+
+
+// Menampilkan Semua Mata Kuliah yang Diajarkan di Kampus:
+cypher
+   MATCH (dosen:Dosen)-[:Mengajar]->(kampus:Kampus)
+   RETURN dosen, kampus
+
+
+// Menambahkan Node untuk Fakultas: cypher
+   MATCH (kampus:Kampus {name: 'Universitas Pamulang'})
+   CREATE (:Fakultas {name: 'Fakultas Ilmu Komputer'})-[:Terletak_di]->(kampus)
+
+
+// Menampilkan Mahasiswa yang Berada di Fakultas Tertentu: cypher
+   MATCH (student:Student)-[:Berkuliah]->(:Kampus {name: 'Universitas Pamulang'})-[:Terletak_di]->(:Fakultas {name: 'Fakultas Ilmu Komputer'})
+   RETURN student
+
+
+// Menambahkan Node untuk Ruangan Kuliah: cypher
+   MATCH (kampus:Kampus {name: 'Universitas Pamulang'})
+   CREATE (:Ruangan {name: 'Ruang 101', kapasitas: 50})-[:Terletak_di]->(kampus)
+
+
+// Menampilkan Semua Ruangan Kuliah di Kampus: cypher
+   MATCH (ruangan:Ruangan)-[:Terletak_di]->(:Kampus {name: 'Universitas Pamulang'})
+   RETURN ruangan
+
+
+// Menambahkan Hubungan Antara Mahasiswa dan Ruangan Kuliah: cypher
+   MATCH (student:Student {name: 'Rio Mulya Syawal'}), (ruangan:Ruangan {name: 'Ruang 101'})
+   CREATE (student)-[:Berada_di]->(ruangan)
+
+
+// Menampilkan Mahasiswa yang Berada di Ruangan Tertentu: cypher
+   MATCH (student:Student)-[:Berada_di]->(:Ruangan {name: 'Ruang 101'})
+   RETURN student
+
+
+// Menghitung Jumlah Mahasiswa yang Belum Mengambil Mata Kuliah Tertentu: cypher
+   MATCH (subject:Matkul{name: 'Matematika Dasar'})<-[:Mempelajari]-(student:Student)-[:Berkuliah]->(:Kampus{name: 'Universitas Pamulang'})
+WHERE NOT (student)-[:Mempelajari]->(:Matkul{name: 'Kimia Dasar'})
+RETURN COUNT(student) AS jumlah_mahasiswa
+
+
+// Menghapus Semua Node Dosen yang Tidak Mengajar di Kampus: cypher
+    MATCH (dosen:Dosen)
+    WHERE NOT (dosen)-[:Mengajar]->(:Kampus {name: 'Universitas Pamulang'})
+    DETACH DELETE dosen
+ 
+
+// Menampilkan Mahasiswa yang Belum Mengambil Mata Kuliah pada Semester Tertentu: cypher
+    MATCH (student:Student)-[:Berkuliah]->(:Kampus {name: 'Universitas Pamulang'})
+    WHERE NOT (student)-[:Mempelajari]->(:Matkul {semester: 5})
+    RETURN student
+ 
+
+// Menampilkan Rata-rata Semester Mahasiswa di Kampus: cypher
+    MATCH (student:Student)-[:Berkuliah]->(:Kampus {name: 'Universitas Pamulang'})
+    RETURN AVG(student.semester) AS rata_rata_semester
+ 
