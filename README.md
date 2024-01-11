@@ -1,1 +1,2 @@
 # praktikum-basisData
+# leetcode
